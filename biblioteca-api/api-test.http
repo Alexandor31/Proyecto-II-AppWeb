@@ -1,0 +1,80 @@
+POST http://localhost:8080/realms/biblioteca/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=biblioteca-client
+&grant_type=password
+&username=adminuser
+&password=admin
+
+### Obtener lista de libros autenticado
+GET http://localhost:3000/api/libros
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjWUlLS1pOalM4LV9oOHJzYWRDNVlxTWN2MWhxb2pFTWJ5c1J3V3RnSkVBIn0.eyJleHAiOjE3NTM1OTg5NjYsImlhdCI6MTc1MzU5ODY2NiwianRpIjoib25ydHJvOmVjNDE2ZTFlLTUyNzgtNzlkNy1kNTkzLTZjZDZkYThjOGU0ZiIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9yZWFsbXMvYmlibGlvdGVjYSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI3Y2ZmNmM2Mi0yMmE4LTQwZmUtOGRmYS1iNDlkMTRjNzU3M2IiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJiaWJsaW90ZWNhLWNsaWVudCIsInNpZCI6IjM4YWM4NmM3LWFmNjEtNDJhMy1iYWNkLTE3NTRkOGE1ZDk1YiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWJpYmxpb3RlY2EiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBZG1pbiBVc2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW51c2VyIiwiZ2l2ZW5fbmFtZSI6IkFkbWluIiwiZmFtaWx5X25hbWUiOiJVc2VyIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSJ9.W0ZhI5q7ebfq70OBxI-BvK7ERlPU8P9E0xTvGunuNcL7EbBDP4hO7f6s6P0IRES6o5ZJIDSoz5sONtIQT6fkxrRg3mEWolxNBBbaT905Vcqxq1wVIZcSP1ja-rIiY1BZMbMxLUSgbylNcGsFBRvctIKv9Utvl51gmCdfFOD2wggfRCxETdH-tkUEwqGy3XS5RUOdRAW8e35m998dWRVrBSSpd081HPYv-w_Ss_UvuWJq39pd1i3-iITu1e7jBrRJJZssvais8MLeejbWkAmdX1dThqG95wwthY-HTksLXi5ILI33Q-o2FnSeBy2sQKnY8ss6PZyGfYzfQTLfUo7mqA
+
+
+### Crear préstamo
+POST http://localhost:3000/api/prestamos
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "ejemplarId": 1
+}
+
+### Crear usuario de prueba
+POST http://localhost:3000/api/usuarios
+Content-Type: application/json
+
+{
+  "tipo": "alumno",
+  "login": "juan123",
+  "password": "1234",
+  "nombre": "Juan",
+  "apellidos": "Pérez",
+  "correo": "juan@example.com",
+  "calle": "Av. Central",
+  "numero": "101",
+  "piso": "2",
+  "ciudad": "Quito",
+  "codigo_postal": "170001",
+  "telefono_padres": "0991234567",
+  "estado": "activo"
+}
+
+### Crear libro
+POST http://localhost:3000/api/libros
+Content-Type: application/json
+
+{
+  "isbn": "978-1234567890",
+  "titulo": "Cien años de soledad",
+  "autor": "Gabriel García Márquez",
+  "num_paginas": 400,
+  "num_ejemplares": 3,
+  "ejemplares_disponibles": 3,
+  "portada_uri": "https://example.com/portada.jpg"
+}
+
+### Crear ejemplar
+POST http://localhost:3000/api/ejemplares
+Content-Type: application/json
+
+{
+  "codigo": "EJEMP-001",
+  "libroId": 1,
+  "fecha_adquisicion": "2025-01-01",
+  "observaciones": "Nuevo, sin daños"
+}
+
+
+### Crear préstamo
+POST http://localhost:3000/api/prestamos
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "ejemplarId": 1
+}
+
+
+### Ver préstamos del usuario 1
+GET http://localhost:3000/api/prestamos/usuario/1
